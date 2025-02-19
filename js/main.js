@@ -1,6 +1,6 @@
 "use strict";
 
-const kittenList = document.querySelector("js-list");
+const kittenList = document.querySelector(".js-list");
 
 const kittenOne = `<li class="card">
     <article>
