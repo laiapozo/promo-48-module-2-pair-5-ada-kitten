@@ -41,3 +41,19 @@ const kittenThree = `<li class="card">
                 </li>`;
 
 kittenList.innerHTML = kittenOne + kittenTwo + kittenThree;
+
+const btn = document.querySelector(".js-btn-add");
+const form = document.querySelector(".js-new-form");
+const formInputs = document.querySelector(".js-form");
+
+btn.addEventListener("click", ()=>{
+ form.classList.toggle("collapsed")
+});
+
+const btnCancel = document.querySelector(".js-btn-cancel");
+
+btnCancel.addEventListener("click", ()=>{
+ form.classList.add("collapsed");
+ formInputs.reset();
+});
+
