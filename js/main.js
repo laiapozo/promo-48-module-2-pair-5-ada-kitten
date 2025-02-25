@@ -14,37 +14,34 @@ const kittenThreeName = "Cielo";
 const kittenThreeRace = "Maine Coon";
 const kittenThreeDescription = "Tienen la cabeza cuadrada y los ojos simétricos, por lo que su bella mirada se ha convertido en una de sus señas de identidad. Sus ojos son grandes y las orejas resultan largas y en punta.";
 
-const kittenOne = `<li class="card js-kitten-one">
+function renderKitten(url, desc, name, race) {
+  return `<li class="card js-kitten-one">
     <article>
-      <img class="card_img" src=${kittenOneImage} alt="siames-cat"/>
-      <h3 class="card_title">${kittenOneName.toUpperCase()}</h3>
-      <h4 class="card_race">${kittenOneRace}</h4>
-      <p class="card_description">${kittenOneDescription}</p>
+      <img class="card_img" src=${url} alt="siames-cat"/>
+      <h3 class="card_title">${name.toUpperCase()}</h3>
+      <h4 class="card_race">${race}</h4>
+      <p class="card_description">${desc}</p>
     </article>
   </li>`;
-const kittenTwo = `<li class="card js-kitten-two">
-                    <img class="card_img" src=${kittenTwoImage} alt="sphynx-cat" />
-                    <h3 class="card_title">${kittenTwoName.toUpperCase()}</h3>
-                    <h4 class="card_race">${kittenTwoRace}</h4>
-                    <p class="card_description">${kittenTwoDescription}</p>
-                  </li>`;
+}
 
-const kittenThree = `<li class="card js-kitten-three">
-                    <img class="card_img" src=${kittenThreeImage} alt="maine-coon-cat" />
-                    <h3 class="card_title">${kittenThreeName.toUpperCase()}</h3>
-                    <h4 class="card_race">${kittenThreeRace}</h4>
-                    <p class="card_description">${kittenThreeDescription}</p>
-                  </li>`;
+const kittenOne = renderKitten(kittenOneImage, kittenOneDescription, kittenOneName, kittenOneRace);
+const kittenTwo = renderKitten(kittenTwoImage, kittenTwoDescription, kittenTwoName, kittenTwoRace);
+const kittenThree = renderKitten(kittenThreeImage, kittenThreeDescription, kittenThreeName, kittenThreeRace);
 
 kittenList.innerHTML = kittenOne + kittenTwo + kittenThree;
+
+// Mostrar u ocultar el formulario función
 
 const btn = document.querySelector(".js-btn-add");
 const form = document.querySelector(".js-new-form");
 const formInputs = document.querySelector(".js-form");
 
-btn.addEventListener("click", () => {
+function showHideCatForm () {
   form.classList.toggle("collapsed");
-});
+}
+
+btn.addEventListener("click", showHideCatForm);
 
 const btnCancel = document.querySelector(".js-btn-cancel");
 
