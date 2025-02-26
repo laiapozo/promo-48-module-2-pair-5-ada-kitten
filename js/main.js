@@ -14,8 +14,8 @@ const kittenThreeName = "Cielo";
 const kittenThreeRace = "Maine Coon";
 const kittenThreeDescription = "Tienen la cabeza cuadrada y los ojos simétricos, por lo que su bella mirada se ha convertido en una de sus señas de identidad. Sus ojos son grandes y las orejas resultan largas y en punta.";
 
-function renderKitten(url, desc, name, race) {
-  return `<li class="card js-kitten-one">
+function renderKitten(url, desc, name, race, clase) {
+  return `<li class="card ${clase}">
     <article>
       <img class="card_img" src=${url} alt="siames-cat"/>
       <h3 class="card_title">${name.toUpperCase()}</h3>
@@ -25,9 +25,9 @@ function renderKitten(url, desc, name, race) {
   </li>`;
 }
 
-const kittenOne = renderKitten(kittenOneImage, kittenOneDescription, kittenOneName, kittenOneRace);
-const kittenTwo = renderKitten(kittenTwoImage, kittenTwoDescription, kittenTwoName, kittenTwoRace);
-const kittenThree = renderKitten(kittenThreeImage, kittenThreeDescription, kittenThreeName, kittenThreeRace);
+const kittenOne = renderKitten(kittenOneImage, kittenOneDescription, kittenOneName, kittenOneRace, "js-kitten-one");
+const kittenTwo = renderKitten(kittenTwoImage, kittenTwoDescription, kittenTwoName, kittenTwoRace, "js-kitten-two");
+const kittenThree = renderKitten(kittenThreeImage, kittenThreeDescription, kittenThreeName, kittenThreeRace, "js-kitten-three");
 
 kittenList.innerHTML = kittenOne + kittenTwo + kittenThree;
 
@@ -61,8 +61,11 @@ const kittenDesc3 =
 const kittenOneCard = document.querySelector(".js-kitten-one");
 const kittenTwoCard = document.querySelector(".js-kitten-two");
 const kittenThreeCard = document.querySelector(".js-kitten-three");
+console.log(kittenTwoCard);
+console.log(kittenOneCard);
+console.log(kittenThreeCard);
 
-searchButton.addEventListener("click", (event) => {
+const filterKitten = (event) => {
   event.preventDefault();
   const descrSearchText = input_search_desc.value;
 
@@ -79,5 +82,11 @@ searchButton.addEventListener("click", (event) => {
     kittenTwoCard.classList.add("collapsed");
     kittenOneCard.classList.add("collapsed");
     kittenThreeCard.classList.remove("collapsed");
+  } else if (descrSearchText === "") {
+    kittenOneCard.classList.remove("collapsed");
+    kittenTwoCard.classList.remove("collapsed");
+    kittenThreeCard.classList.remove("collapsed");
   }
-});
+};
+
+searchButton.addEventListener("click", filterKitten); 
