@@ -1,35 +1,52 @@
 "use strict";
 
 const kittenList = document.querySelector(".js-list");
-const kittenOneImage = "https://dev.adalab.es/gato-siames.webp";
-const kittenOneName = "Anastacio";
-const kittenOneRace = "Siamés";
-const kittenOneDescription = "Porte elegante, su patrón de color tan característico y sus ojos de un azul intenso, pero su historia se remonta a Asía al menos hace 500 años, donde tuvo su origen muy posiblemente."
-const kittenTwoImage = "https://dev.adalab.es/sphynx-gato.webp";
-const kittenTwoName = "Fiona";
-const kittenTwoRace = "Sphynx";
-const kittenTwoDescription = "Produce fascinación y curiosidad. Exótico, raro, bello, extraño...hasta con pinta de alienígena han llegado a definir a esta raza gatuna que se caracteriza por la «ausencia» de pelo.";
-const kittenThreeImage = "https://dev.adalab.es/maine-coon-cat.webp";
-const kittenThreeName = "Cielo";
-const kittenThreeRace = "Maine Coon";
-const kittenThreeDescription = "Tienen la cabeza cuadrada y los ojos simétricos, por lo que su bella mirada se ha convertido en una de sus señas de identidad. Sus ojos son grandes y las orejas resultan largas y en punta.";
 
-function renderKitten(url, desc, name, race, clase) {
-  return `<li class="card ${clase}">
-    <article>
-      <img class="card_img" src=${url} alt="siames-cat"/>
-      <h3 class="card_title">${name.toUpperCase()}</h3>
-      <h4 class="card_race">${race}</h4>
-      <p class="card_description">${desc}</p>
-    </article>
-  </li>`;
+function renderKitten(kittenData) {
+  kittenList.innerHTML += `
+    <li class="card ${kittenData.clase}">
+      <article>
+        <img class="card_img" src=${kittenData.image} alt="cat"/>
+        <h3 class="card_title">${kittenData.name.toUpperCase()}</h3>
+        <h4 class="card_race">${kittenData.race}</h4>
+        <p class="card_description">${kittenData.description}</p>
+      </article>
+    </li>
+  `;
 }
 
-const kittenOne = renderKitten(kittenOneImage, kittenOneDescription, kittenOneName, kittenOneRace, "js-kitten-one");
-const kittenTwo = renderKitten(kittenTwoImage, kittenTwoDescription, kittenTwoName, kittenTwoRace, "js-kitten-two");
-const kittenThree = renderKitten(kittenThreeImage, kittenThreeDescription, kittenThreeName, kittenThreeRace, "js-kitten-three");
+const kittenData_1 = {
+  image: 'https://dev.adalab.es/gato-siames.webp',
+  name: 'Anastacio',
+  race: 'Siamés',
+  description: 'Porte elegante, su patrón de color tan característico y sus ojos de un azul intenso, pero su historia se remonta a Asía al menos hace 500 años, donde tuvo su origen muy posiblemente.',
+  clase: 'js-kitten-one'
+};
 
-kittenList.innerHTML = kittenOne + kittenTwo + kittenThree;
+const kittenData_2 = {
+  image: 'https://dev.adalab.es/sphynx-gato.webp',
+  name: 'Fiona',
+  race: 'Sphynx',
+  description: 'Produce fascinación y curiosidad. Exótico, raro, bello, extraño...hasta con pinta de alienígena han llegado a definir a esta raza gatuna que se caracteriza por la «ausencia» de pelo.',
+  clase: 'js-kitten-two'
+};
+
+const kittenData_3 = {
+  image: 'https://dev.adalab.es/maine-coon-cat.webp',
+  name: 'Cielo',
+  race: 'Maine Coon',
+  description: 'Tienen la cabeza cuadrada y los ojos simétricos, por lo que su bella mirada se ha convertido en una de sus señas de identidad. Sus ojos son grandes y las orejas resultan largas y en punta.',
+  clase: 'js-kitten-three'
+};
+
+renderKitten(kittenData_1);
+renderKitten(kittenData_2);
+renderKitten(kittenData_3);
+
+console.log(kittenData_1);
+console.log(kittenData_2);
+console.log(kittenData_3);
+
 
 // Mostrar u ocultar el formulario función
 
@@ -50,41 +67,34 @@ btnCancel.addEventListener("click", () => {
   formInputs.reset();
 });
 
+// Buscador gato
+
 const searchButton = document.querySelector(".js_button-search");
 const input_search_desc = document.querySelector(".js_in_search_desc");
-const kittenDesc1 =
-  "Porte elegante, su patrón de color tan característico y sus ojos de un azul intenso, pero su historia se remonta a Asía al menos hace 500 años, donde tuvo su origen muy posiblemente.";
-const kittenDesc2 =
-  "Produce fascinación y curiosidad. Exótico, raro, bello, extraño… hasta con pinta de alienígena han llegado a definir a esta raza gatuna que se caracteriza por la «ausencia» de pelo.";
-const kittenDesc3 =
-  "Tienen la cabeza cuadrada y los ojos simétricos, por lo que su bella mirada se ha convertido en una de sus señas de identidad. Sus ojos son grandes y las orejas resultan largas y en punta.";
+
 const kittenOneCard = document.querySelector(".js-kitten-one");
 const kittenTwoCard = document.querySelector(".js-kitten-two");
 const kittenThreeCard = document.querySelector(".js-kitten-three");
-console.log(kittenTwoCard);
-console.log(kittenOneCard);
-console.log(kittenThreeCard);
 
 const filterKitten = (event) => {
   event.preventDefault();
   const descrSearchText = input_search_desc.value;
 
-  if (kittenDesc1.includes(descrSearchText)) {
-    kittenTwoCard.classList.add("collapsed");
-    kittenThreeCard.classList.add("collapsed");
+  if (descrSearchText.length === 0) {
     kittenOneCard.classList.remove("collapsed");
-  } else if (kittenDesc2.includes(descrSearchText)) {
-    kittenOneCard.classList.add("collapsed");
-    kittenThreeCard.classList.add("collapsed");
     kittenTwoCard.classList.remove("collapsed");
-
-  } else if (kittenDesc3.includes(descrSearchText)) {
-    kittenTwoCard.classList.add("collapsed");
-    kittenOneCard.classList.add("collapsed");
     kittenThreeCard.classList.remove("collapsed");
-  } else if (descrSearchText === "") {
+  } else if (kittenData_1.description.includes(descrSearchText)) {
+    kittenTwoCard.classList.add("collapsed");
+    kittenThreeCard.classList.add("collapsed");
     kittenOneCard.classList.remove("collapsed");
+  } else if (kittenData_2.description.includes(descrSearchText)) {
+    kittenOneCard.classList.add("collapsed");
+    kittenThreeCard.classList.add("collapsed");
     kittenTwoCard.classList.remove("collapsed");
+  } else if (kittenData_3.description.includes(descrSearchText)) {
+    kittenTwoCard.classList.add("collapsed");
+    kittenOneCard.classList.add("collapsed");
     kittenThreeCard.classList.remove("collapsed");
   }
 };
