@@ -1,15 +1,17 @@
 "use strict";
 
+// Pintar los tres gatos en el HTML
+
 const kittenList = document.querySelector(".js-list");
 
-function renderKitten(kittenData) {
-  kittenList.innerHTML += `
-    <li class="card ${kittenData.clase}">
+function renderKitten(objectKitten) {
+  return `
+    <li class="card ${objectKitten.clase}">
       <article>
-        <img class="card_img" src=${kittenData.image} alt="cat"/>
-        <h3 class="card_title">${kittenData.name.toUpperCase()}</h3>
-        <h4 class="card_race">${kittenData.race}</h4>
-        <p class="card_description">${kittenData.description}</p>
+        <img class="card_img" src=${objectKitten.image} alt="cat"/>
+        <h3 class="card_title">${objectKitten.name.toUpperCase()}</h3>
+        <h4 class="card_race">${objectKitten.race}</h4>
+        <p class="card_description">${objectKitten.description}</p>
       </article>
     </li>
   `;
@@ -40,16 +42,8 @@ const kittenData_3 = {
 };
 
 const kittenDataList = [kittenData_1, kittenData_2, kittenData_3];
-console.log(kittenDataList);
 
-renderKitten(kittenData_1);
-renderKitten(kittenData_2);
-renderKitten(kittenData_3);
-
-console.log(kittenData_1);
-console.log(kittenData_2);
-console.log(kittenData_3);
-
+kittenList.innerHTML = renderKitten(kittenDataList[0]) + renderKitten(kittenDataList[1]) + renderKitten(kittenDataList[2]);
 
 // Mostrar u ocultar el formulario función
 
