@@ -39,6 +39,9 @@ const kittenData_3 = {
   clase: 'js-kitten-three'
 };
 
+const kittenDataList = [kittenData_1, kittenData_2, kittenData_3];
+console.log(kittenDataList);
+
 renderKitten(kittenData_1);
 renderKitten(kittenData_2);
 renderKitten(kittenData_3);
